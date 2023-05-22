@@ -27,10 +27,13 @@ function RegistrationScreen() {
     setShowPassword(!showPassword);
   };
 
-  const handleFocus = (inputName) => {
+  // const handleFocus = (inputName) => {
+  //   setFocusedInput(inputName);
+  // };
+  const handleFocus =(inputName)=>{
     setFocusedInput(inputName);
-  };
-
+    setIsShowKeyboard(true)
+  }
   const handleBlur = () => {
     setFocusedInput(null);
   };
@@ -57,12 +60,12 @@ function RegistrationScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.page}>
       <ImageBackground
         style={styles.image}
         source={require("../assets/image/Photo-BG.jpg")}
       >
-        <KeyboardAvoidingView style={styles.keybContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={{...styles.boxForm,    flex: isShowKeyboard ? 0.82 :0.67,}}>
           <View style={styles.boxAvatar}>
             <View style={styles.avatarBord}>
@@ -83,7 +86,7 @@ function RegistrationScreen() {
           <View style={{ ...styles.form, width: dimensions }}>
             <TextInput
               onFocus={() => handleFocus("input1")}
-              //onFocus={() => setIsShowKeyboard(true)}
+             
               onBlur={handleBlur}
               style={{
                 ...styles.formInput,
@@ -95,7 +98,7 @@ function RegistrationScreen() {
 
             <TextInput
               onFocus={() => handleFocus("input2")}
-              //onFocus={() => setIsShowKeyboard(true)}
+              
               onBlur={handleBlur}
               style={{
                 ...styles.formInput,
@@ -108,7 +111,7 @@ function RegistrationScreen() {
             <View style={styles.overlayPassword}>
               <TextInput
                 onFocus={() => handleFocus("input3")}
-                //onFocus={() => setIsShowKeyboard(true)}
+               
                 onBlur={handleBlur}
                 style={{
                   ...styles.formInputPass,
@@ -146,7 +149,7 @@ function RegistrationScreen() {
 }
 export default RegistrationScreen;
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
     //justifyContent: "flex-end",
     // alignItems: "center",
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignItems: "center",
   },
-  keybContainer:{
+  container:{
     flex:1,
     justifyContent: "flex-end",
   },
@@ -169,8 +172,6 @@ const styles = StyleSheet.create({
     marginTop: -60,
     marginBottom: 32,
 
-    // borderColor: "#111",
-    // borderWidth: 1,
   },
   avatarBord: {
     backgroundColor: "#F6F6F6",
@@ -212,18 +213,17 @@ const styles = StyleSheet.create({
   //  flex:0.82,
   },
   title: {
-    // fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto-Medium",
     fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
     letterSpacing: 0.01,
     color: "#212121",
-    marginBottom: 30,
+    marginBottom: 33,
     marginHorizontal: 16,
   },
   form: {
     marginHorizontal: 16,
-    //marginBottom: 45, //*** */
   },
   formInput: {
     backgroundColor: "#F6F6F6",
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
 
-    // fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     color: "#212121",
@@ -239,11 +239,11 @@ const styles = StyleSheet.create({
   overlayPassword: {
     flexDirection: "row",
     justifyContent: "space-between",
-    //alignItems: "center",
+ 
     
     borderRadius: 8,
     overflow: "hidden",
-    // fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
 
@@ -278,14 +278,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   buttonTitle: {
-    // fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     textAlign: "center",
     color: "#FFFFFF",
   },
   navigationText: {
-    // fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     textAlign: "center",
