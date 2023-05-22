@@ -30,6 +30,7 @@ function RegistrationScreen() {
   const handleFocus = (inputName) => {
     setFocusedInput(inputName);
   };
+
   const handleBlur = () => {
     setFocusedInput(null);
   };
@@ -54,6 +55,7 @@ function RegistrationScreen() {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
   }
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -81,7 +83,7 @@ function RegistrationScreen() {
           <View style={{ ...styles.form, width: dimensions }}>
             <TextInput
               onFocus={() => handleFocus("input1")}
-              onFocus={() => setIsShowKeyboard(true)}
+              //onFocus={() => setIsShowKeyboard(true)}
               onBlur={handleBlur}
               style={{
                 ...styles.formInput,
