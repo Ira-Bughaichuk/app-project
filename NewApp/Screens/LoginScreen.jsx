@@ -14,15 +14,21 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-  Keyboard
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
+
+const initialState = {
+  email:"",
+  password: "",
+}
 
 function LoginScreen() {
   const [focusedInput, setFocusedInput] = useState(null);
   const [imagePath, setImagePath] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  const [password, setPassword] = useState("");
+  const [dateForm, setDateForm] = useState(initialState);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -57,13 +63,20 @@ function LoginScreen() {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
   }
+
+  const handleSubmit =()=>{
+    keyboardHide();
+    console.log(dateForm);
+    setDateForm(initialState);
+  }
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <View style={styles.page}>
       <ImageBackground
         style={styles.image}
         source={require("../assets/image/Photo-BG.jpg")}
       >
-        <KeyboardAvoidingView style={styles.keybContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={{...styles.boxForm,    flex: isShowKeyboard ? 0.65 :0.60,}}>
           <Text style={styles.title}>Війти</Text>
           <View style={{ ...styles.form, width: dimensions }}>
@@ -72,6 +85,10 @@ function LoginScreen() {
             <TextInput
               onFocus={() => handleFocus("input2")}
               onBlur={handleBlur}
+              onChangeText={(value) => {
+                setDateForm((prevState) => ({ ...prevState, email: value }));
+              }}
+              value={dateForm.email}
               style={{
                 ...styles.formInput,
                 marginBottom: 16,
@@ -84,6 +101,10 @@ function LoginScreen() {
               <TextInput
                 onFocus={() => handleFocus("input3")}
                 onBlur={handleBlur}
+                onChangeText={(value) => {
+                  setDateForm((prevState) => ({ ...prevState, password: value }));
+                }}
+                value={dateForm.password}
                 style={{
                   ...styles.formInputPass,
                   borderColor:
@@ -105,7 +126,7 @@ function LoginScreen() {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={keyboardHide}>
+            <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={handleSubmit}>
               <Text style={styles.buttonTitle}>Війти</Text>
             </TouchableOpacity>
             <Text style={styles.navigationText}>
@@ -116,13 +137,14 @@ function LoginScreen() {
         </KeyboardAvoidingView>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
     //justifyContent: "flex-end",
     // alignItems: "center",
@@ -134,7 +156,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     alignItems: "center",
   },
-  keybContainer:{
+  container:{
     flex:1,
     justifyContent: "flex-end",
   },

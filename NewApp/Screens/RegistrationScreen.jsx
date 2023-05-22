@@ -13,15 +13,22 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-  Keyboard
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
+
+const initialState = {
+  login: "",
+  email:"",
+  password: "",
+}
 
 function RegistrationScreen() {
   const [focusedInput, setFocusedInput] = useState(null);
   const [imagePath, setImagePath] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  //const [password, setPassword] = useState("");
+  const [dateForm, setDateForm] = useState(initialState);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -55,8 +62,15 @@ function RegistrationScreen() {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
   }
+   
+  const handleSubmit =()=>{
+  keyboardHide();
+  console.log(dateForm);
+  setDateForm(initialState);
+  }
 
   return (
+    <TouchableWithoutFeedback onPress={keyboardHide}>
     <View style={styles.page}>
       <ImageBackground
         style={styles.image}
@@ -83,8 +97,11 @@ function RegistrationScreen() {
           <View style={{ ...styles.form, width: dimensions }}>
            <TextInput
               onFocus={() => handleFocus("input1")}
-             
               onBlur={handleBlur}
+              onChangeText={(value) => {
+                setDateForm((prevState) => ({ ...prevState, login: value }));
+              }}
+              value={dateForm.login}
               style={{
                 ...styles.formInput,
                 marginBottom: 16,
@@ -96,6 +113,10 @@ function RegistrationScreen() {
              <TextInput
               onFocus={() => handleFocus("input2")}
               onBlur={handleBlur}
+              onChangeText={(value) => {
+                setDateForm((prevState) => ({ ...prevState, email: value }));
+              }}
+              value={dateForm.email}
               style={{
                 ...styles.formInput,
                 marginBottom: 16,
@@ -108,6 +129,11 @@ function RegistrationScreen() {
               <TextInput
                  onFocus={() => handleFocus("input3")}
                  onBlur={handleBlur}
+                
+                 value={dateForm.password}
+                 onChangeText={(value) => {
+                  setDateForm((prevState) => ({ ...prevState, password: value }));
+                }}
                 style={{
                   ...styles.formInputPass,
                   borderColor:
@@ -129,7 +155,7 @@ function RegistrationScreen() {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={keyboardHide}>
+            <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={handleSubmit} >
               <Text style={styles.buttonTitle}>Зареєструватись</Text>
             </TouchableOpacity>
             <Text style={styles.navigationText}>
@@ -140,9 +166,14 @@ function RegistrationScreen() {
         </KeyboardAvoidingView>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
+
+
 export default RegistrationScreen;
+
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
