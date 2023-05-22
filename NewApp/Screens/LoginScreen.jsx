@@ -71,7 +71,6 @@ function LoginScreen() {
 
             <TextInput
               onFocus={() => handleFocus("input2")}
-              //onFocus={() => setIsShowKeyboard(true)}
               onBlur={handleBlur}
               style={{
                 ...styles.formInput,
@@ -84,7 +83,6 @@ function LoginScreen() {
             <View style={styles.overlayPassword}>
               <TextInput
                 onFocus={() => handleFocus("input3")}
-                //onFocus={() => setIsShowKeyboard(true)}
                 onBlur={handleBlur}
                 style={{
                   ...styles.formInputPass,

@@ -27,9 +27,6 @@ function RegistrationScreen() {
     setShowPassword(!showPassword);
   };
 
-  // const handleFocus = (inputName) => {
-  //   setFocusedInput(inputName);
-  // };
   const handleFocus =(inputName)=>{
     setFocusedInput(inputName);
     setIsShowKeyboard(true)
@@ -84,7 +81,7 @@ function RegistrationScreen() {
           </View>
           <Text style={styles.title}>Реєстрація</Text>
           <View style={{ ...styles.form, width: dimensions }}>
-            <TextInput
+           <TextInput
               onFocus={() => handleFocus("input1")}
              
               onBlur={handleBlur}
@@ -94,11 +91,10 @@ function RegistrationScreen() {
                 borderColor: focusedInput === "input1" ? "#FF6C00" : "#E8E8E8",
               }}
               placeholder="Логін"
-            />
+            /> 
 
-            <TextInput
+             <TextInput
               onFocus={() => handleFocus("input2")}
-              
               onBlur={handleBlur}
               style={{
                 ...styles.formInput,
@@ -106,13 +102,12 @@ function RegistrationScreen() {
                 borderColor: focusedInput === "input2" ? "#FF6C00" : "#E8E8E8",
               }}
               placeholder="Адреса електронної пошти"
-            />
+            /> 
 
             <View style={styles.overlayPassword}>
               <TextInput
-                onFocus={() => handleFocus("input3")}
-               
-                onBlur={handleBlur}
+                 onFocus={() => handleFocus("input3")}
+                 onBlur={handleBlur}
                 style={{
                   ...styles.formInputPass,
                   borderColor:
@@ -240,7 +235,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
  
-    
     borderRadius: 8,
     overflow: "hidden",
     fontFamily: "Roboto-Regular",
@@ -264,7 +258,7 @@ const styles = StyleSheet.create({
     right: 0,
     width: 110,
     height: "100%",
-    backgroundColor:"red",
+
   },
   buttonText: {
     padding: 16,
