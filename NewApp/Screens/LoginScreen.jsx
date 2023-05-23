@@ -43,20 +43,17 @@ function LoginScreen() {
   };
 
   const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width - 8 * 2
+     Dimensions.get("window").width - 8 * 2
   );
 
   useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get("window").width - 8 * 2;
-      setDimensions(width);
-    };
-    Dimensions.addEventListener("change", onChange);
-
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  }, []);
+          const width = Dimensions.get("window").width - 8 * 2;
+          setDimensions(width);
+        };
+        const subscription = Dimensions.addEventListener("change", onChange);
+    return () => subscription?.remove();
+  });
 
 
   const keyboardHide=()=>{

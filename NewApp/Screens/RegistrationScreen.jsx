@@ -48,15 +48,12 @@ function RegistrationScreen() {
 
   useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get("window").width - 8 * 2;
-      setDimensions(width);
-    };
-    Dimensions.addEventListener("change", onChange);
-
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  }, []);
+          const width = Dimensions.get("window").width - 8 * 2;
+          setDimensions(width);
+        };
+        const subscription = Dimensions.addEventListener("change", onChange);
+    return () => subscription?.remove();
+  });
 
   const keyboardHide=()=>{
     setIsShowKeyboard(false);
