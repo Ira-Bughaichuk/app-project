@@ -23,7 +23,7 @@ const initialState = {
   password: "",
 }
 
-function LoginScreen() {
+function LoginScreen({navigation}) {
   const [focusedInput, setFocusedInput] = useState(null);
   const [imagePath, setImagePath] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -65,6 +65,7 @@ function LoginScreen() {
     keyboardHide();
     console.log(dateForm);
     setDateForm(initialState);
+    navigation.navigate("Home");
   }
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -126,9 +127,17 @@ function LoginScreen() {
             <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={handleSubmit}>
               <Text style={styles.buttonTitle}>Війти</Text>
             </TouchableOpacity>
+            <View style={styles.overlayText}>
             <Text style={styles.navigationText}>
-            Немає облікового запису? Зареєструватись
+            Немає облікового запису?
             </Text>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Registration")} >
+            <Text style={styles.navigationText}>
+            Зареєструватись
+            </Text>
+            </TouchableOpacity>
+           
+            </View>
           </View>
         </View>
         </KeyboardAvoidingView>
@@ -236,6 +245,11 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#FFFFFF",
+  },
+  overlayText:{
+    flexDirection:"row",
+    justifyContent:"center",
+    gap: 5,
   },
   navigationText: {
     fontFamily: "Roboto-Regular",

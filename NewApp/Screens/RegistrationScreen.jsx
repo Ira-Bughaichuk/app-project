@@ -23,7 +23,7 @@ const initialState = {
   password: "",
 }
 
-function RegistrationScreen() {
+function RegistrationScreen({navigation}) {
   const [focusedInput, setFocusedInput] = useState(null);
   const [imagePath, setImagePath] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -64,6 +64,7 @@ function RegistrationScreen() {
   keyboardHide();
   console.log(dateForm);
   setDateForm(initialState);
+  navigation.navigate("Home");
   }
 
   return (
@@ -155,9 +156,13 @@ function RegistrationScreen() {
             <TouchableOpacity activeOpacity={0.9} style={styles.formButton} onPress={handleSubmit} >
               <Text style={styles.buttonTitle}>Зареєструватись</Text>
             </TouchableOpacity>
-            <Text style={styles.navigationText}>
-              Вже є обліковий запис? Увійти
-            </Text>
+            <View style={styles.overlayText}>
+            <Text style={styles.navigationText}> Вже є обліковий запис? </Text>
+
+              <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Login")} >
+              <Text style={styles.navigationText}> Увійти</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         </KeyboardAvoidingView>
@@ -306,11 +311,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFFFFF",
   },
+  overlayText:{
+    flexDirection:"row",
+    justifyContent:"center",
+  },
   navigationText: {
     fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+
   },
 });
