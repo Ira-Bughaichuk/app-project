@@ -9,22 +9,23 @@ import PostsScreen from "../Screens/PostsScreen";
 import CreatePostsScreen from "../Screens/CreatePostsScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 
-
 export default function Home({ navigation }) {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator screenOptions={{tabBarOptions: {
-      style: {
-        justifyContent: "center",
-        alignItems: "center",
-      },
-    },
-  tabBarShowLabel: false,
-   
-      }} >
+    <Tab.Navigator
+      screenOptions={{
+        tabBarOptions: {
+          style: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        },
+        tabBarShowLabel: false,
+      }}
+    >
       <Tab.Screen
-        name="Posts"
+        name="PostsScreen"
         component={PostsScreen}
         options={{
           title: "Публікації",
@@ -97,13 +98,13 @@ export default function Home({ navigation }) {
             fontSize: 17,
             lineHeight: 22,
           },
-           tabBarStyle: { display: 'none' },
+          tabBarStyle: { display: "none" },
 
           headerLeft: () => (
             <TouchableOpacity
               style={{ padding: 10 }}
               activeOpacity={0.8}
-              onPress={() => navigation.navigate("Posts")}
+              onPress={() => navigation.navigate("PostsScreen")}
             >
               <AntDesign name="arrowleft" size={24} color="#BDBDBD" />
             </TouchableOpacity>
@@ -155,16 +156,3 @@ export default function Home({ navigation }) {
     </Tab.Navigator>
   );
 }
-
-// options={{ title: "Публікації",headerStyle: {
-//   backgroundColor: "#FFFFFF",
-// },
-
-// headerRight: () => (
-//   <TouchableOpacity
-//   onPress={() => navigation.navigate("Login")} title="ghh"
-//   >
-//   <Image source={logOut} />
-//   </TouchableOpacity>
-// ),
-// }}

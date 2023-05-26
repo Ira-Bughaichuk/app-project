@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import MapView, { Marker } from "react-native-maps";
+import { useRoute } from "@react-navigation/native";
 
-const MapScreen = () => {
+function MapScreen() {
+  const { params } = useRoute();
+
   return (
-    <View>
-      <Text>MapScreen</Text>
-    </View>
-  )
+    <MapView
+      style={{ flex: 1 }}
+      region={{
+        ...params.location,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+      }}
+      showsUserLocation={true}
+    >
+      {params && <Marker title={params.name} coordinate={params.location} />}
+    </MapView>
+  );
 }
-
-export default MapScreen
-
-const styles = StyleSheet.create({})
+export default MapScreen;
