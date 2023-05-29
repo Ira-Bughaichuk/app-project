@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import add from "../assets/image/add.png";
 import del from "../assets/image/del.png";
+
 
 import {
   StyleSheet,
@@ -18,6 +20,8 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 
+import { loginThunk } from './../redux/auth/authOperations';
+
 const initialState = {
   email:"",
   password: "",
@@ -30,6 +34,7 @@ function LoginScreen({navigation}) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [dateForm, setDateForm] = useState(initialState);
 
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -63,9 +68,9 @@ function LoginScreen({navigation}) {
 
   const handleSubmit =()=>{
     keyboardHide();
-    console.log(dateForm);
+    dispatch(loginThunk(dateForm));
     setDateForm(initialState);
-    navigation.navigate("Home");
+ 
   }
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -79,7 +84,6 @@ function LoginScreen({navigation}) {
           <Text style={styles.title}>Війти</Text>
           <View style={{ ...styles.form, width: dimensions }}>
            
-
             <TextInput
               onFocus={() => handleFocus("input2")}
               onBlur={handleBlur}
@@ -131,7 +135,7 @@ function LoginScreen({navigation}) {
             <Text style={styles.navigationText}>
             Немає облікового запису?
             </Text>
-            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("Registration")} >
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("RegistrationScreen")} >
             <Text style={styles.navigationText}>
             Зареєструватись
             </Text>

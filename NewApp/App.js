@@ -1,15 +1,8 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
+import {Provider} from "react-redux";
 import { useFonts } from "expo-font";
-import { AntDesign } from "@expo/vector-icons";
-
-import RegistrationScreen from "./Screens/RegistrationScreen.jsx";
-import LoginScreen from "./Screens/LoginScreen.jsx";
-import Home from "./Screens/Home.jsx";
-import MapScreen from "./Screens/MapScreen";
-import CommentsScreen from "./Screens/CommentsScreen";
+import { store } from "./redux/store";
+import MainRoute from './Screens/MainRoute';
 
 export default function App({ navigation }) {
   const [fontsLoaded] = useFonts({
@@ -23,41 +16,9 @@ export default function App({ navigation }) {
     return null;
   }
 
-  const MainStack = createStackNavigator();
-
   return (
-    <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Login">
-        <MainStack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false, }}
-        />
-        <MainStack.Screen
-          name="MapScreen"
-          component={MapScreen}
-          options={{
-            title: "Карта",
-          }}
-        />
-        <MainStack.Screen
-          name="CommentsScreen"
-          component={CommentsScreen}
-          options={{
-            title: "Коментарі",
-          }}
-        />
-      </MainStack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <MainRoute />
+    </Provider>
   );
 }

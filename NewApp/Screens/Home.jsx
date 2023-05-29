@@ -1,16 +1,28 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
+import { useDispatch } from "react-redux";
+
+import { logOutThunk } from "../redux/auth/authOperations";
 import { TouchableOpacity, View } from "react-native";
 
 import PostsScreen from "../Screens/PostsScreen";
 import CreatePostsScreen from "../Screens/CreatePostsScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 
+const Tab = createBottomTabNavigator();
+
 export default function Home({ navigation }) {
-  const Tab = createBottomTabNavigator();
+  const dispatch = useDispatch();
+
+  function hendelHeaderRight() {
+    dispatch(logOutThunk());
+  }
 
   return (
     <Tab.Navigator
@@ -51,7 +63,7 @@ export default function Home({ navigation }) {
             <TouchableOpacity
               style={{ padding: 10 }}
               activeOpacity={0.8}
-              onPress={() => navigation.navigate("Login")}
+              onPress={hendelHeaderRight}
             >
               <MaterialIcons name="logout" size={24} color="#BDBDBD" />
             </TouchableOpacity>
